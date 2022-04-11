@@ -1,4 +1,4 @@
-package testfiles
+package test
 
 import (
 	"nuclei-assignment-1/utils"
@@ -12,7 +12,13 @@ var tests = []struct {
 	iquantity string
 	expected  bool
 }{
-	{"-name tshirt", "raw", "12.2", "2", true},
+	{
+		iname:     "-name tshirt",
+		itype:     "raw",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  true,
+	},
 	{"-name tshirt", "manufactured", "192.2", "4", true},
 	{"-name tshirt", "raw", "12.2", "-quantit 2", false},
 	{"-name t shirt", "imported", "12.2", "2", false},

@@ -1,4 +1,4 @@
-package testfiles
+package test
 
 import (
 	"nuclei-assignment-1/models"
@@ -12,11 +12,23 @@ var billTests = []struct {
 	salesTTax   float64
 	finalTPrice float64
 }{
-	{"raw", 100, 1, 12.8, 78},
-	{"manufactured", 120, 2, 23, 121},
+	{
+		ittype:      "raw",
+		itprice:     100,
+		itquantity:  1,
+		salesTTax:   12.5,
+		finalTPrice: 112.5,
+	},
+	{
+		ittype:      "manufactured",
+		itprice:     120,
+		itquantity:  2,
+		salesTTax:   35.4,
+		finalTPrice: 310.8,
+	},
 }
 
-func BillTest(t *testing.T) {
+func TestBill(t *testing.T) {
 	for _, test := range billTests {
 		actualSalesTax, actualFinalPrice := models.
 			CalculateTaxAndFinalPrice(test.ittype, test.itprice, test.itquantity)

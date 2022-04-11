@@ -23,11 +23,9 @@ func InputValueError() {
 }
 
 func ParseFloatError(err error) {
-	fmt.Println(err)
-	fmt.Printf("❌error occured in parsing input, please give correct input\n")
+	fmt.Println(err, "❌error occured in parsing input, please give correct input\n")
 }
 
 func ParseIntError(err error) {
-	fmt.Println(err)
-	fmt.Printf("❌error occured in parsing input, please give correct input\n")
+	fmt.Println(err, "❌error occured in parsing input, please give correct input\n")
 }
