@@ -61,8 +61,24 @@ func ValidateRollNumber(r string) (roll int, ok bool) {
 }
 
 // validate courses, handle (blank, string, int, len(courses) == 4)
-func ValidateCourses(c string) (byte, bool) {
-	return 'A', true
+func ValidateCourse(c string) (course byte, ok bool) {
+	_, err := strconv.Atoi(c)
+	if err == nil {
+		fmt.Printf("course can't be integer\ninvalid course\n")
+	} else if c == "" {
+		fmt.Printf("course can't be empty\ninvalid course\n")
+	} else if len(c) != 1 {
+		fmt.Printf("course can't be other then prescribed\n")
+	} else {
+		byteArr := []byte(c)
+		switch byteArr[0] {
+		case 'A', 'B', 'C', 'D', 'E', 'F':
+			course, ok = byteArr[0], true
+		default:
+			fmt.Printf("invalid course\n")
+		}
+	}
+	return
 }
 
 // validate choice, should not be (string, blank, <= 5)

@@ -15,6 +15,7 @@ func AddUserDetails(in *bufio.Scanner) models.User {
 		addr    string
 		rollno  int
 		courses []byte
+		course  byte
 		ok      bool
 	)
 inputlabel:
@@ -43,9 +44,17 @@ inputlabel:
 				continue inputlabel
 			}
 		}
+	courselabel: // Todo: handle unique courses
+		for len(courses) != 4 {
+			course, ok = utils.ValidateCourse(src.ReadInput("course", in))
+			if !ok {
+				continue courselabel
+			} else {
+				courses = append(courses, course)
+			}
+		}
 		break
 	}
 	u.Setter(name, age, addr, rollno, courses)
-	// courses := src.ReadInput("courses", in)
 	return u
 }
