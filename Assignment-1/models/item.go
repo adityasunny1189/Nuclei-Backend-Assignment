@@ -6,10 +6,6 @@ type Item struct {
 	ItemType string
 }
 
-func (o *Item) Getter() Item {
-	return *o
-}
-
 func (o *Item) Setter(name string, price float64, itemType string) {
 	o.Name = name
 	o.Price = price

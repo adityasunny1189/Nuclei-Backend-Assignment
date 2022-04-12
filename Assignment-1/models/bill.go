@@ -8,10 +8,6 @@ type Bill struct {
 	ItemQuantity int
 }
 
-func (b *Bill) Getter() Bill {
-	return *b
-}
-
 func (b *Bill) Setter(i Item, q int) {
 	b.ItemName = i.Name
 	b.ItemPrice = i.Price

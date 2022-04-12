@@ -11,7 +11,7 @@ import (
 func ParseInputName() string {
 	name := ""
 	reader := bufio.NewReader(os.Stdin)
-	InputNameDetails()
+	PrintInputNameDetails()
 	for name == "" {
 		text, _ := reader.ReadString('\n')
 		name, _ = utils.ValidateName(text)
@@ -21,7 +21,7 @@ func ParseInputName() string {
 
 func ParseInputString() (string, float64, int) {
 	itype, iprice, iquantity := "", 0., 0
-	InputDetails()
+	PrintInputDetails()
 	reader := bufio.NewReader(os.Stdin)
 naming:
 	for itype == "" || iprice == 0. || iquantity == 0 {
