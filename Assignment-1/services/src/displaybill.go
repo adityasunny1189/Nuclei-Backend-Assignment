@@ -6,11 +6,13 @@ import (
 )
 
 func DisplayBill(o models.Order) {
-	fmt.Printf("\n-----------BILL DETAILS-----------\n\n")
-	fmt.Printf("ITEM NAME: %s\n", o.B.ItemName)
-	fmt.Printf("ITEM PRICE: %f\n", o.B.ItemPrice)
-	fmt.Printf("ITEM QUANTITY: %d\n", o.B.ItemQuantity)
-	fmt.Printf("SALES TAX: %.3f\n", o.B.SalesTax)
-	fmt.Printf("FINAL PRICE: %.4f\n", o.B.FinalPrice)
-	fmt.Printf("\n----------HAPPY SHOOPING----------\n\n")
+	fmt.Printf(`-----------BILL DETAILS-----------
+ITEM NAME: %s
+ITEM PRICE: %f
+ITEM QUANTITY: %d
+SALES TAX: %.3f
+FINAL PRICE: %.4f
+----------HAPPY SHOOPING----------
+`, o.B.ItemName, o.B.ItemPrice, o.B.ItemQuantity, o.B.SalesTax, o.B.FinalPrice)
+
 }

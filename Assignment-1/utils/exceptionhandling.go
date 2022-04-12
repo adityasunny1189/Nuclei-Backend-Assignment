@@ -7,25 +7,24 @@ func StringError() {
 }
 
 func InputNameError() {
-	fmt.Printf("❌Input Rejected\n")
-	fmt.Printf("Usage:\t[-name <product name>]\n")
+	fmt.Printf("❌Input Rejected\nUsage:\t[-name <product name>]\n")
 }
 
 func InputValueError() {
-	fmt.Printf("❌Input Rejected\n")
-	fmt.Printf("--------------------------\n")
-	fmt.Printf(`|Usage: 
+	fmt.Printf(`❌Input Rejected
+--------------------------
+|Usage: 
 |-type <raw || imported || manufactured>
 |-price <price of item>
 |-quantity <no of items>
+--------------------------
 `)
-	fmt.Printf("--------------------------\n")
 }
 
 func ParseFloatError(err error) {
-	fmt.Println(err, "❌error occured in parsing input, please give correct input\n")
+	fmt.Println(err, "❌error occured in parsing input, please give correct input")
 }
 
 func ParseIntError(err error) {
-	fmt.Println(err, "❌error occured in parsing input, please give correct input\n")
+	fmt.Println(err, "❌error occured in parsing input, please give correct input")
 }
