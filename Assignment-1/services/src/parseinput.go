@@ -13,8 +13,12 @@ func ParseInputName() string {
 	reader := bufio.NewReader(os.Stdin)
 	PrintInputNameDetails()
 	for name == "" {
-		text, _ := reader.ReadString('\n')
-		name, _ = utils.ValidateName(text)
+		text, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err, "error occured while reading string")
+		} else {
+			name, _ = utils.ValidateName(text)
+		}
 	}
 	return name
 }
@@ -25,7 +29,10 @@ func ParseInputString() (string, float64, int) {
 	reader := bufio.NewReader(os.Stdin)
 naming:
 	for itype == "" || iprice == 0. || iquantity == 0 {
-		text, _ := reader.ReadString('\n')
+		text, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err, "error occured while reading string")
+		}
 		textfields := strings.Fields(text)
 		l := len(textfields)
 		if l != 2 {
