@@ -55,6 +55,10 @@ inputlabel:
 		}
 		break
 	}
-	u.Setter(name, age, addr, rollno, courses)
-	return u
+	//u.Setter(name, age, addr, rollno, courses)
+	return models.User {
+		name: name, 
+		age: age, 
+		
+	}
 }
