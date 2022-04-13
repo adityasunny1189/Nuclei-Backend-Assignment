@@ -5,14 +5,18 @@ import (
 	"nuclei-assignment-1/models"
 )
 
-func DisplayBill(o models.Order) {
-	fmt.Printf(`-----------BILL DETAILS-----------
+const (
+	DisplayBillContent = `-----------BILL DETAILS-----------
 ITEM NAME: %s
 ITEM PRICE: %f
 ITEM QUANTITY: %d
 SALES TAX: %.3f
 FINAL PRICE: %.4f
 ----------HAPPY SHOOPING----------
-`, o.B.ItemName, o.B.ItemPrice, o.B.ItemQuantity, o.B.SalesTax, o.B.FinalPrice)
+`
+)
+
+func DisplayBill(o models.Order) {
+	fmt.Printf(DisplayBillContent, o.B.ItemName, o.B.ItemPrice, o.B.ItemQuantity, o.B.SalesTax, o.B.FinalPrice)
 
 }

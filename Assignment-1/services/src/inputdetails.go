@@ -2,20 +2,25 @@ package src
 
 import "fmt"
 
-func PrintInputDetails() {
-	fmt.Printf(`--------------------------
+const (
+	InputDetailsContent = `--------------------------
 |Usage: 
 |-type <raw || imported || manufactured>
 |-price <price of item>
 |-quantity <no of items>
 --------------------------
-`)
+`
+	InputNameDetailsContent = `--------------------------------
+Usage: [-name <product name>]
+--------------------------------
+`
+)
+
+func PrintInputDetails() {
+	fmt.Print(InputDetailsContent)
 
 }
 
 func PrintInputNameDetails() {
-	fmt.Printf(`--------------------------------
-Usage: [-name <product name>]
---------------------------------
-`)
+	fmt.Print(InputNameDetailsContent)
 }

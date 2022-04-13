@@ -15,25 +15,20 @@ func (b *Bill) Setter(i Item, q int) {
 	b.SalesTax, b.FinalPrice = CalculateTaxAndFinalPrice(i.ItemType, i.Price, b.ItemQuantity)
 }
 
-func TwelvePointFivePercentOfItemCost(p float64) float64 {
-	return (p * 12.5) / 100
-}
-
-func CalculateTaxAndFinalPrice(t string, p float64, iq int) (float64, float64) {
-	tax, finalPrice := 0., 0.
+func CalculateTaxAndFinalPrice(t string, p float64, iq int) (tax float64, finalPrice float64) {
 	switch t {
 	case "raw":
-		tax = TwelvePointFivePercentOfItemCost(p)
+		tax = (p * 12.5) / 100
 	case "manufactured":
-		tpf := TwelvePointFivePercentOfItemCost(p)
+		tpf := (p * 12.5) / 100
 		tax = tpf + (2*(p+tpf))/100
 	case "imported":
 		importDuty := (10 * p) / 100
-		finalCost := importDuty + TwelvePointFivePercentOfItemCost(p) + p
-		surchage := 0.
-		if finalCost <= 100. {
+		finalCost := importDuty + ((p * 12.5) / 100) + p
+		var surchage float64
+		if finalCost <= 100 {
 			surchage = 5
-		} else if finalCost <= 200. {
+		} else if finalCost <= 200 {
 			surchage = 10
 		} else {
 			surchage = (5 * finalCost) / 100
@@ -42,5 +37,5 @@ func CalculateTaxAndFinalPrice(t string, p float64, iq int) (float64, float64) {
 	}
 	tax *= float64(iq)
 	finalPrice = ((p + tax) * float64(iq))
-	return tax, finalPrice
+	return
 }

@@ -1,64 +1,73 @@
 package utils
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 	"strings"
 )
 
-func ValidateName(t string) (string, bool) {
+const (
+	InputNameErr = `❌Input Rejected
+Usage: [-name <product name>]`
+	StringErr           = `❌expected string`
+	TypeErr             = `❌type can be only <raw || imported || manufactured>`
+	Name                = `-name`
+	Raw                 = "raw"
+	Manufactured        = "manufactured"
+	Imported            = "imported"
+	NegativePriceErr    = `❌Price can't be less than 1`
+	NegativeQuantityErr = `❌quantity can't be less than 1`
+)
+
+func ValidateName(t string) (name string, err error) {
 	textfields := strings.Fields(t)
-	if len(textfields) != 2 || textfields[0] != "-name" {
-		InputNameError()
-		return "", false
+	if len(textfields) != 2 || textfields[0] != Name {
+		err = errors.New(InputNameErr)
+		return
 	}
-	name := textfields[1]
-	_, err := strconv.Atoi(name)
-	if err == nil {
-		StringError()
-		InputNameError()
-		return "", false
-	} else {
-		fmt.Printf("Name accepted✅\n")
-		return name, true
+	out := textfields[1]
+	_, er := strconv.Atoi(out)
+	if er == nil {
+		err = errors.New(StringErr)
+		return
 	}
+	name = out
+	return
 }
 
-func ValidateType(t string) (string, bool) {
+func ValidateType(t string) (tpe string, err error) {
 	switch t {
-	case "raw", "manufactured", "imported":
-		fmt.Printf("Type accepted✅\n")
-		return t, true
+	case Raw, Manufactured, Imported:
+		tpe = t
+		return
 	default:
-		fmt.Printf("❌type can be only <raw || imported || manufactured>\n")
-		return "", false
+		err = errors.New(TypeErr)
+		return
 	}
 }
 
-func ValidatePrice(t string) (float64, bool) {
-	ip, err := strconv.ParseFloat(t, 64)
-	if err != nil {
-		ParseFloatError(err)
-		return 0., false
-	} else if ip < 1 {
-		fmt.Printf("❌Price can't be less than 1\n")
-		return 0., false
-	} else {
-		fmt.Printf("Price accepted✅\n")
-		return ip, true
+func ValidatePrice(t string) (ip float64, err error) {
+	out, er := strconv.ParseFloat(t, 64)
+	if er != nil {
+		err = er
+		return
+	} else if out < 1 {
+		err = errors.New(NegativePriceErr)
+		return
 	}
+	ip = out
+	return
 }
 
-func ValidateQuantity(t string) (int, bool) {
-	iq, err := strconv.Atoi(t)
-	if err != nil {
-		ParseIntError(err)
-		return 0, false
-	} else if iq < 1 {
-		fmt.Printf("❌quantity can't be less than 1\n")
-		return 0, false
-	} else {
-		fmt.Printf("Quantity accepted✅\n")
-		return iq, true
+func ValidateQuantity(t string) (iq int, err error) {
+	out, er := strconv.Atoi(t)
+	if er != nil {
+		err = er
+		return
+	} else if out < 1 {
+		err = errors.New(NegativeQuantityErr)
+		return
 	}
+	iq = out
+	return
 }

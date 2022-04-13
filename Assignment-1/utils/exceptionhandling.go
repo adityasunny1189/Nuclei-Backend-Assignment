@@ -2,29 +2,36 @@ package utils
 
 import "fmt"
 
-func StringError() {
-	fmt.Printf("❌expected string\n")
-}
-
-func InputNameError() {
-	fmt.Printf("❌Input Rejected\nUsage:\t[-name <product name>]\n")
-}
-
-func InputValueError() {
-	fmt.Printf(`❌Input Rejected
+const (
+	ExpectedStringContent = `❌expected string`
+	InputNameErrContent   = `❌Input Rejected
+Usage: [-name <product name>]`
+	InputValueErrContent = `❌Input Rejected
 --------------------------
 |Usage: 
 |-type <raw || imported || manufactured>
 |-price <price of item>
 |-quantity <no of items>
---------------------------
-`)
+--------------------------`
+	ParseErrContent = `❌error occured in parsing input, please give correct input`
+)
+
+func StringError() {
+	fmt.Println(ExpectedStringContent)
+}
+
+func InputNameError() {
+	fmt.Println(InputNameErrContent)
+}
+
+func InputValueError(err error) {
+	fmt.Println(err, InputValueErrContent)
 }
 
 func ParseFloatError(err error) {
-	fmt.Println(err, "❌error occured in parsing input, please give correct input")
+	fmt.Println(err, ParseErrContent)
 }
 
 func ParseIntError(err error) {
-	fmt.Println(err, "❌error occured in parsing input, please give correct input")
+	fmt.Println(err, ParseErrContent)
 }

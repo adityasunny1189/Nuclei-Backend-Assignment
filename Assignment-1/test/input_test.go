@@ -6,6 +6,7 @@ import (
 )
 
 var tests = []struct {
+	testid    int
 	iname     string
 	itype     string
 	iprice    string
@@ -13,6 +14,7 @@ var tests = []struct {
 	expected  bool
 }{
 	{
+		testid:    1,
 		iname:     "-name tshirt",
 		itype:     "raw",
 		iprice:    "12.2",
@@ -20,46 +22,196 @@ var tests = []struct {
 		expected:  true,
 	},
 	{
+		testid:    2,
 		iname:     "-name tshirt",
 		itype:     "manufactured",
 		iprice:    "192.2",
 		iquantity: "4",
 		expected:  true,
 	},
-	{"-name tshirt", "raw", "12.2", "-quantit 2", false},
-	{"-name t shirt", "imported", "12.2", "2", false},
-	{"-name tshirt", "funny", "12.2", "2", false},
-	{"-name tshirt", "-tye raw", "12.2", "2", false},
-	{"-name tshirt", "raw imported", "12.2", "2", false},
-	{"-name tshirt", "raw", "one hundred", "2", false},
-	{"-name pant", "raw", "19", "2", true},
-	{"-name pant", "", "19", "2", false},
-	{"-name", "-type", "-price", "-quantity", false},
-	{"-name", "manufactured", "192.2", "4", false},
-	{"", "-type", "12.2", "-quantit 2", false},
-	{"-name", "imported", "12.2", "2", false},
-	{"-name jacket", "-type", "12.2", "-quantity", false},
-	{"-name jacket", "-tye raw", "12.2", "2", false},
-	{"-name jacket", "", "12.2", "2", false},
-	{"-name jacket", "raw", "", "2", false},
-	{"-name pant", "raw", "19", "one", false},
-	{"", "", "", "", false},
-	{"-name jacket", "12", "", "2", false},
-	{"-name jacket", "raw", "-type raw", "2", false},
-	{"-name jacket", "raw", "manufactured", "-type raw", false},
+	{
+		testid:    3,
+		iname:     "-name tshirt",
+		itype:     "raw",
+		iprice:    "12.2",
+		iquantity: "-quantit 2",
+		expected:  false,
+	},
+	{
+		testid:    4,
+		iname:     "-name t shirt",
+		itype:     "imported",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    5,
+		iname:     "-name tshirt",
+		itype:     "funny",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    6,
+		iname:     "-name tshirt",
+		itype:     "-tye raw",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    7,
+		iname:     "-name tshirt",
+		itype:     "raw imported",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    8,
+		iname:     "-name tshirt",
+		itype:     "raw",
+		iprice:    "one hundred",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    9,
+		iname:     "-name pant",
+		itype:     "raw",
+		iprice:    "19",
+		iquantity: "2",
+		expected:  true,
+	},
+	{
+		testid:    10,
+		iname:     "-name pant",
+		itype:     "",
+		iprice:    "19",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    11,
+		iname:     "-name",
+		itype:     "-type",
+		iprice:    "-price",
+		iquantity: "-quantity",
+		expected:  false,
+	},
+	{
+		testid:    12,
+		iname:     "-name",
+		itype:     "manufactured",
+		iprice:    "192.2",
+		iquantity: "4",
+		expected:  false,
+	},
+	{
+		testid:    13,
+		iname:     "",
+		itype:     "-type",
+		iprice:    "12.2",
+		iquantity: "-quantit 2",
+		expected:  false,
+	},
+	{
+		testid:    14,
+		iname:     "-name",
+		itype:     "imported",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    15,
+		iname:     "-name jacket",
+		itype:     "-type",
+		iprice:    "12.2",
+		iquantity: "-quantity",
+		expected:  false,
+	},
+	{
+		testid:    16,
+		iname:     "-name jacket",
+		itype:     "-tye raw",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    17,
+		iname:     "-name jacket",
+		itype:     "",
+		iprice:    "12.2",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    18,
+		iname:     "-name jacket",
+		itype:     "raw",
+		iprice:    "",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    19,
+		iname:     "-name pant",
+		itype:     "raw",
+		iprice:    "19",
+		iquantity: "one",
+		expected:  false,
+	},
+	{
+		testid:    20,
+		iname:     "",
+		itype:     "",
+		iprice:    "",
+		iquantity: "",
+		expected:  false,
+	},
+	{
+		testid:    21,
+		iname:     "-name jacket",
+		itype:     "12",
+		iprice:    "",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    22,
+		iname:     "-name jacket",
+		itype:     "raw",
+		iprice:    "-type raw",
+		iquantity: "2",
+		expected:  false,
+	},
+	{
+		testid:    23,
+		iname:     "-name jacket",
+		itype:     "raw",
+		iprice:    "manufactured",
+		iquantity: "-type raw",
+		expected:  false,
+	},
 }
 
 func TestInputString(t *testing.T) {
 	for _, test := range tests {
 		expectedVal := test.expected
-		testname := test.iname
-		_, actualTestNameVal := utils.ValidateName(testname)
-		_, actualTestTypeVal := utils.ValidateType(test.itype)
-		_, actualTestPriceVal := utils.ValidatePrice(test.iprice)
-		_, actualTestQuantityVal := utils.ValidateQuantity(test.iquantity)
-		actualValue := actualTestNameVal && actualTestPriceVal && actualTestQuantityVal && actualTestTypeVal
+		_, errname := utils.ValidateName(test.iname)
+		_, errtype := utils.ValidateType(test.itype)
+		_, errprice := utils.ValidatePrice(test.iprice)
+		_, errquant := utils.ValidateQuantity(test.iquantity)
+		actualValue := false
+		if errname == nil && errtype == nil && errprice == nil && errquant == nil {
+			actualValue = true
+		}
 		if expectedVal != actualValue {
-			t.Errorf("expected %v got %v", expectedVal, actualValue)
+			t.Errorf("error in test case %d", test.testid)
 		}
 	}
 }
