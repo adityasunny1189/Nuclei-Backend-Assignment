@@ -1,7 +1,7 @@
 package test
 
 import (
-	"nuclei-assignment-1/models"
+	"nuclei-assignment-1/services"
 	"testing"
 )
 
@@ -30,7 +30,7 @@ var billTests = []struct {
 
 func TestBill(t *testing.T) {
 	for _, test := range billTests {
-		actualSalesTax, actualFinalPrice := models.
+		actualSalesTax, actualFinalPrice := services.
 			CalculateTaxAndFinalPrice(test.ittype, test.itprice, test.itquantity)
 		if actualSalesTax != test.salesTTax || actualFinalPrice != test.finalTPrice {
 			t.Errorf("expected %f and %f got %f and %f",
