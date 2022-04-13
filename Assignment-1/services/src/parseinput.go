@@ -23,7 +23,7 @@ func ParseInputName() (name string) {
 	for name == "" {
 		text, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println(err, "error occured while reading string")
+			fmt.Println(err, "error occurred while reading string")
 		} else {
 			name, err = utils.ValidateName(text)
 			if err != nil {
@@ -41,7 +41,7 @@ naming:
 	for itype == "" || iprice == 0 || iquantity == 0 {
 		text, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println(err, "error occured while reading string")
+			fmt.Println(err, "error occurred while reading string")
 		}
 		textfields := strings.Fields(text)
 		l := len(textfields)

@@ -13,7 +13,7 @@ Usage: [-name <product name>]`
 |-price <price of item>
 |-quantity <no of items>
 --------------------------`
-	ParseErrContent = `❌error occured in parsing input, please give correct input`
+	ParseErrContent = `❌error occurred in parsing input, please give correct input`
 )
 
 func StringError() {
