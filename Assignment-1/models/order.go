@@ -1,15 +1,10 @@
 package models
 
 type Order struct {
-	I Item
-	B Bill
-}
-
-func (o *Order) Getter() Order {
-	return *o
-}
-
-func (o *Order) Setter(i Item, b Bill) {
-	o.I = i
-	o.B = b
+	ItemName     string
+	ItemPrice    float64
+	ItemType     string
+	SalesTax     float64
+	FinalPrice   float64
+	ItemQuantity int
 }

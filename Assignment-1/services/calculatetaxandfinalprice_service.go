@@ -1,19 +1,4 @@
-package models
-
-type Bill struct {
-	ItemName     string
-	ItemPrice    float64
-	SalesTax     float64
-	FinalPrice   float64
-	ItemQuantity int
-}
-
-func (b *Bill) Setter(i Item, q int) {
-	b.ItemName = i.Name
-	b.ItemPrice = i.Price
-	b.ItemQuantity = q
-	b.SalesTax, b.FinalPrice = CalculateTaxAndFinalPrice(i.ItemType, i.Price, b.ItemQuantity)
-}
+package services
 
 func CalculateTaxAndFinalPrice(t string, p float64, iq int) (tax float64, finalPrice float64) {
 	switch t {

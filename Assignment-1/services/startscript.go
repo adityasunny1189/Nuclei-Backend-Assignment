@@ -21,14 +21,15 @@ func StartScript() {
 	for {
 	start:
 		iname, itype, iprice, quantity := src.ReadInput()
-		var (
-			i models.Item
-			b models.Bill
-			o models.Order
-		)
-		i.Setter(iname, iprice, itype)
-		b.Setter(i, quantity)
-		o.Setter(i, b)
+		tax, finalPrice := CalculateTaxAndFinalPrice(itype, iprice, quantity)
+		o := models.Order{
+			ItemName:     iname,
+			ItemType:     itype,
+			ItemPrice:    iprice,
+			ItemQuantity: quantity,
+			SalesTax:     tax,
+			FinalPrice:   finalPrice,
+		}
 		cart = append(cart, o)
 		ok := src.MoreOrders()
 		if ok {
