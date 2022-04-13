@@ -20,6 +20,7 @@ const (
 	EmptyCourseErr     = "course can't be left empty"
 	InvalidCourseErr   = "course diffrent then prescribed"
 	DuplicateCourseErr = "course already subscribed"
+	RollnoNotFoundErr  = "rollno not present"
 )
 
 // validate name, should not be (blank/int)
@@ -114,6 +115,21 @@ func ValidateInputChoice(c string) (ch int, err error) {
 		err = errors.New(NegativeChoiceErr)
 	} else {
 		ch = op
+	}
+	return
+}
+
+// validate roll no, handle (blank, string, unique) for delete operation
+func ValidateRollNumberDelOp(r string, rnlist map[int]bool) (roll int, err error) {
+	rl, er := strconv.Atoi(r)
+	if er != nil {
+		err = er
+	} else if rl <= 0 {
+		err = errors.New(NegativeRollnoErr)
+	} else if !rnlist[rl] {
+		err = errors.New(RollnoNotFoundErr)
+	} else {
+		roll = rl
 	}
 	return
 }

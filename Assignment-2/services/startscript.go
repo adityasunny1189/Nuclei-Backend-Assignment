@@ -33,9 +33,12 @@ start:
 			u := handler.AddUserDetails(in, rollnolist)
 			rollnolist[u.Rollno] = true
 			users = append(users, u)
-			fmt.Println(users)
 		case 2: // Show user details
+			handler.ShowUserDetails(users)
 		case 3: // Delete user details
+			op, rn := handler.DeleteUserDetails(in, users, rollnolist)
+			users = op
+			rollnolist[rn] = false // freeing the deleted rollno
 		case 4: // Save user details
 		case 5: // Exit
 			break start
