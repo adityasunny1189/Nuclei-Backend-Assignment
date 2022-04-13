@@ -16,7 +16,7 @@ FINAL PRICE: %.4f
 `
 )
 
-func DisplayBill(o models.Order) {
-	fmt.Printf(DisplayBillContent, o.B.ItemName, o.B.ItemPrice, o.B.ItemQuantity, o.B.SalesTax, o.B.FinalPrice)
+func DisplayBill(odr models.Order) {
+	fmt.Printf(DisplayBillContent, odr.B.ItemName, odr.B.ItemPrice, odr.B.ItemQuantity, odr.B.SalesTax, odr.B.FinalPrice)
 
 }
