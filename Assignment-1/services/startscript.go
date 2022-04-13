@@ -36,7 +36,7 @@ func StartScript() {
 			goto start
 		}
 		for _, order := range cart {
-			src.DisplayBill(order.Getter())
+			src.DisplayBill(order)
 		}
 		break
 	}
