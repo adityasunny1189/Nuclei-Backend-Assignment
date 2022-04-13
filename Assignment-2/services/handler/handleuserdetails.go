@@ -2,63 +2,73 @@ package handler
 
 import (
 	"bufio"
+	"fmt"
 	"nuclei-assignment-2/models"
 	"nuclei-assignment-2/services/src"
 	"nuclei-assignment-2/utils"
 )
 
-func AddUserDetails(in *bufio.Scanner) models.User {
-	var u models.User
+func AddUserDetails(in *bufio.Scanner, rollnolist map[int]bool) models.User {
 	var (
 		name    string
 		age     int
 		addr    string
 		rollno  int
 		courses []byte
-		course  byte
-		ok      bool
 	)
+	courselist := make(map[byte]bool)
 inputlabel:
 	for {
 		if name == "" {
-			name, ok = utils.ValidateFullName(src.ReadInput("name", in))
-			if !ok {
+			op, err := utils.ValidateFullName(src.ReadInput("name", in))
+			if err != nil {
+				fmt.Println(err)
 				continue inputlabel
 			}
+			name = op
 		}
 		if age == 0 {
-			age, ok = utils.ValidateAge(src.ReadInput("age", in))
-			if !ok {
+			op, err := utils.ValidateAge(src.ReadInput("age", in))
+			if err != nil {
+				fmt.Println(err)
 				continue inputlabel
 			}
+			age = op
 		}
 		if addr == "" {
-			addr, ok = utils.ValidateAddr(src.ReadInput("address", in))
-			if !ok {
+			op, err := utils.ValidateAddr(src.ReadInput("address", in))
+			if err != nil {
+				fmt.Println(err)
 				continue inputlabel
 			}
+			addr = op
 		}
 		if rollno == 0 {
-			rollno, ok = utils.ValidateRollNumber(src.ReadInput("roll no", in))
-			if !ok {
+			op, err := utils.ValidateRollNumber(src.ReadInput("roll no", in), rollnolist)
+			if err != nil {
+				fmt.Println(err)
 				continue inputlabel
 			}
+			rollno = op
 		}
-	courselabel: // Todo: handle unique courses
+	courselabel:
 		for len(courses) != 4 {
-			course, ok = utils.ValidateCourse(src.ReadInput("course", in))
-			if !ok {
+			op, err := utils.ValidateCourse(src.ReadInput("course", in), courselist)
+			if err != nil {
+				fmt.Println(err)
 				continue courselabel
 			} else {
-				courses = append(courses, course)
+				courselist[op] = true
+				courses = append(courses, op)
 			}
 		}
 		break
 	}
-	//u.Setter(name, age, addr, rollno, courses)
-	return models.User {
-		name: name, 
-		age: age, 
-		
+	return models.User{
+		Fullname: name,
+		Age:      age,
+		Address:  addr,
+		Rollno:   rollno,
+		Courses:  courses,
 	}
 }

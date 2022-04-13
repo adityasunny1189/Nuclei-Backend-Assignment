@@ -10,30 +10,37 @@ import (
 	"os"
 )
 
+const (
+	choice = "Enter your choice: "
+)
+
 func StartScript() {
 	var users []models.User
-	choice := "Enter your choice: "
+	rollnolist := make(map[int]bool)
 	src.DisplayMenu()
 	in := bufio.NewScanner(os.Stdin)
 	fmt.Printf("%s", choice)
 start:
 	for in.Scan() {
-		ch, ok := utils.ValidateInputChoice(in.Text())
-		if !ok {
+		ch, err := utils.ValidateInputChoice(in.Text())
+		if err != nil {
+			fmt.Println(err)
 			fmt.Printf("%s", choice)
 			continue start
 		}
 		switch ch {
-		case 1:
-			u := handler.AddUserDetails(in)
+		case 1: // Add user details
+			u := handler.AddUserDetails(in, rollnolist)
+			rollnolist[u.Rollno] = true
 			users = append(users, u)
 			fmt.Println(users)
-		case 2:
-		case 3:
-		case 4:
-		case 5:
+		case 2: // Show user details
+		case 3: // Delete user details
+		case 4: // Save user details
+		case 5: // Exit
 			break start
 		}
+		src.DisplayMenu()
 		fmt.Printf("%s", choice)
 	}
 }

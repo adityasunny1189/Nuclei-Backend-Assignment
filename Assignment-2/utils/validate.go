@@ -1,97 +1,119 @@
 package utils
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 )
 
+const (
+	GreaterChoiceErr   = "choice can't be greater than 5"
+	NegativeChoiceErr  = "choice can't be negative or 0"
+	NameEmptyErr       = "name can't be empty"
+	NameIntErr         = "name can't be integer"
+	NegativeAgeErr     = "age can't be negative"
+	BigAgeErr          = "age too big to be real"
+	AddrIntErr         = "address can't be integer value"
+	EmptyAddrErr       = "address can't be empty"
+	NegativeRollnoErr  = "negative roll no is not allowed"
+	DuplicateRollnoErr = "roll no already in use"
+	CourseIntErr       = "course can't be integer"
+	EmptyCourseErr     = "course can't be left empty"
+	InvalidCourseErr   = "course diffrent then prescribed"
+	DuplicateCourseErr = "course already subscribed"
+)
+
 // validate name, should not be (blank/int)
-func ValidateFullName(n string) (name string, ok bool) {
-	_, err := strconv.Atoi(n)
-	if err == nil {
-		fmt.Printf("name can't be a number\n")
+func ValidateFullName(n string) (name string, err error) {
+	_, er := strconv.Atoi(n)
+	if er == nil {
+		err = errors.New(NameIntErr)
 	} else if n == "" {
-		fmt.Printf("name can't be empty\n")
+		err = errors.New(NameEmptyErr)
 	} else {
-		name, ok = n, true
+		name = n
 	}
 	return
 }
 
 // validate age, handle (blank, string, <150)
-func ValidateAge(a string) (age int, ok bool) {
-	ag, err := strconv.Atoi(a)
-	if err != nil {
-		fmt.Println(err, "invalid input")
+func ValidateAge(a string) (age int, err error) {
+	ag, er := strconv.Atoi(a)
+	if er != nil {
+		err = er
 	} else if ag <= 0 {
-		fmt.Printf("age can't be 0 or negative\ninvalid input\n")
+		err = errors.New(NegativeAgeErr)
 	} else if ag > 150 {
-		fmt.Printf("age can't be that big\ninvalid input\n")
+		err = errors.New(BigAgeErr)
 	} else {
-		age, ok = ag, true
+		age = ag
 	}
 	return
 }
 
 // validate address, should not be (int, blank)
-func ValidateAddr(a string) (addr string, ok bool) {
-	_, err := strconv.Atoi(a)
-	if err == nil {
-		fmt.Printf("address can't be integer\ninvalid input\n")
+func ValidateAddr(a string) (addr string, err error) {
+	_, er := strconv.Atoi(a)
+	if er == nil {
+		err = errors.New(AddrIntErr)
 	} else if a == "" {
-		fmt.Printf("please provide an address\ninvalid input\n")
+		err = errors.New(EmptyAddrErr)
 	} else {
-		addr, ok = a, true
+		addr = a
 	}
 	return
 }
 
 // validate roll no, handle (blank, string, unique)
-// Todo: handle unique roll numbers
-func ValidateRollNumber(r string) (roll int, ok bool) {
-	rl, err := strconv.Atoi(r)
-	if err != nil {
-		fmt.Println(err, "invalid input")
+func ValidateRollNumber(r string, rnlist map[int]bool) (roll int, err error) {
+	rl, er := strconv.Atoi(r)
+	if er != nil {
+		err = er
+	} else if rnlist[rl] {
+		err = errors.New(DuplicateRollnoErr)
 	} else if rl <= 0 {
-		fmt.Printf("roll no can't be 0 or negative\ninvalid input\n")
+		err = errors.New(NegativeRollnoErr)
 	} else {
-		roll, ok = rl, true
+		roll = rl
 	}
 	return
 }
 
 // validate courses, handle (blank, string, int, len(courses) == 4)
-func ValidateCourse(c string) (course byte, ok bool) {
-	_, err := strconv.Atoi(c)
-	if err == nil {
-		fmt.Printf("course can't be integer\ninvalid course\n")
+func ValidateCourse(c string, cl map[byte]bool) (course byte, err error) {
+	_, er := strconv.Atoi(c)
+	if er == nil {
+		err = errors.New(CourseIntErr)
 	} else if c == "" {
-		fmt.Printf("course can't be empty\ninvalid course\n")
+		err = errors.New(EmptyCourseErr)
 	} else if len(c) != 1 {
-		fmt.Printf("course can't be other then prescribed\n")
+		err = errors.New(InvalidCourseErr)
 	} else {
 		byteArr := []byte(c)
+		if cl[byteArr[0]] {
+			err = errors.New(DuplicateCourseErr)
+			return
+		}
 		switch byteArr[0] {
 		case 'A', 'B', 'C', 'D', 'E', 'F':
-			course, ok = byteArr[0], true
+			course = byteArr[0]
 		default:
-			fmt.Printf("invalid course\n")
+			err = errors.New(InvalidCourseErr)
 		}
 	}
 	return
 }
 
 // validate choice, should not be (string, blank, <= 5)
-func ValidateInputChoice(c string) (ch int, ok bool) {
-	op, err := strconv.Atoi(c)
-	if err != nil {
-		fmt.Println(err, "invalid choice")
+func ValidateInputChoice(c string) (ch int, err error) {
+	op, er := strconv.Atoi(c)
+	if er != nil {
+		err = er
 	} else if op > 5 {
-		fmt.Printf("choice can't be greater than 5\ninvalid choice\n")
+		err = errors.New(GreaterChoiceErr)
 	} else if op <= 0 {
-		fmt.Printf("choice can't be negative or 0\ninvalid choice\n")
+		err = errors.New(NegativeChoiceErr)
 	} else {
-		ch, ok = op, true
+		ch = op
 	}
 	return
 }
