@@ -32,6 +32,7 @@ start:
 			u := handler.AddUserDetails(in, rollnolist)
 			rollnolist[u.Rollno] = true
 			users = append(users, u)
+			SortData(users)
 		case 2: // Show user details
 			handler.ShowUserDetails(users)
 		case 3: // Delete user details

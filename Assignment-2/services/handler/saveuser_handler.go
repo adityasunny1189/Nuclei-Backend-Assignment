@@ -9,6 +9,7 @@ import (
 )
 
 func SaveUserDetails(u []models.User) {
+	// sort the users
 	data, err := json.MarshalIndent(u, "", "\t")
 	if err != nil {
 		fmt.Println(err)
