@@ -3,7 +3,6 @@ package services
 import (
 	"bufio"
 	"fmt"
-	"nuclei-assignment-2/models"
 	"nuclei-assignment-2/services/handler"
 	"nuclei-assignment-2/services/src"
 	"nuclei-assignment-2/utils"
@@ -15,8 +14,8 @@ const (
 )
 
 func StartScript() {
-	var users []models.User
-	rollnolist := make(map[int]bool)
+	users := DeserializeJSON()      // store the users data from the file
+	rollnolist := FillRollNo(users) // create a roll no list to fill the preoccupied roll no
 	src.DisplayMenu()
 	in := bufio.NewScanner(os.Stdin)
 	fmt.Printf("%s", choice)
