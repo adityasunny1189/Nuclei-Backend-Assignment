@@ -40,6 +40,7 @@ start:
 			users = op
 			rollnolist[rn] = false // freeing the deleted rollno
 		case 4: // Save user details
+			handler.SaveUserDetails(users)
 		case 5: // Exit
 			break start
 		}
