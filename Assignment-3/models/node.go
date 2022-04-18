@@ -5,8 +5,8 @@ type Node struct {
 	NodeId     int
 	Name       string
 	Info       map[string][]string
-	Parents    []Node
-	Ancestor   []Node
-	Childs     []Node
-	Decendants []Node
+	Parents    []int
+	Ancestor   []int
+	Childs     []int
+	Decendants []int
 }

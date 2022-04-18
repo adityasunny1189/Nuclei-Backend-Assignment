@@ -119,10 +119,10 @@ loop:
 				fmt.Printf("%s", menuchoice)
 				continue loop
 			}
-			controllers.POSTDependancy(pnodeid, cnodeid, &tree)
+			tree = controllers.POSTDependancy(pnodeid, cnodeid, tree)
 
 		case 8: // POST new root node
-			controllers.POSTNode(&tree)
+			controllers.POSTNode(in, &tree)
 
 		case 9: // EXIT
 			break loop
@@ -131,6 +131,7 @@ loop:
 			fmt.Printf("%s", menuchoice)
 			continue loop
 		}
+		fmt.Println(tree)
 		fmt.Printf("%s", menuchoice)
 	}
 }
