@@ -45,7 +45,7 @@ func GETDecendants(nid int, tree []models.Node) {
 	if targetNode.NodeId == 0 {
 		fmt.Println("node id not found")
 	} else {
-		fmt.Println(targetNode.Decendants)
+		// fmt.Println(targetNode.Decendants)
 	}
 }
 
@@ -61,6 +61,6 @@ func GETAncestors(nid int, tree []models.Node) {
 	} else if targetNode.IsRoot {
 		fmt.Println("root nodes have no ancestors")
 	} else {
-		fmt.Println(targetNode.Ancestor)
+		// fmt.Println(targetNode.Ancestor)
 	}
 }

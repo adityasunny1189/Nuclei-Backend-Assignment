@@ -30,15 +30,11 @@ func POSTDependancy(pid, cid int, tree []models.Node) []models.Node {
 		t[i] = node
 		if node.NodeId == pid {
 			t[i].Childs = append(node.Childs, cid)
-			t[i].Decendants = append(t[i].Decendants, cid)
 		} else if node.NodeId == cid {
 			t[i].IsRoot = false
 			t[i].Parents = append(t[i].Parents, pid)
-			t[i].Ancestor = append(t[i].Decendants, pid)
 		}
 	}
-
-	fmt.Println("TREE: ", t)
 	return t
 }
 
