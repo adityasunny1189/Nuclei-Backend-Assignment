@@ -92,7 +92,7 @@ loop:
 				fmt.Printf("%s", menuchoice)
 				continue loop
 			}
-			controllers.DELETEDependancy(pnodeid, cnodeid, &tree)
+			tree = controllers.DELETEDependancy(pnodeid, cnodeid, tree)
 
 		case 6: // DELETE node from the tree and all its dependancy
 			pop := services.ReadInput(readparentnodeid, in)
