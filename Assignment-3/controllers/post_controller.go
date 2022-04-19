@@ -9,8 +9,9 @@ import (
 )
 
 const (
-	invalidparent = "invalid parent node id"
-	invalidchild  = "invalid child node id"
+	invalidparent    = "invalid parent node id"
+	invalidchild     = "invalid child node id"
+	cyclicdependancy = "this dependancy will result in cyclic dependancy, not allowed"
 )
 
 func POSTDependancy(pid, cid int, tree []models.Node) []models.Node {
@@ -22,6 +23,11 @@ func POSTDependancy(pid, cid int, tree []models.Node) []models.Node {
 	}
 	if ok := utils.ValidNode(cid, tree); !ok {
 		fmt.Println(invalidchild)
+		t = tree
+		return t
+	}
+	if ok := utils.CheckCyclicDependancy(pid, cid, tree); ok {
+		fmt.Println(cyclicdependancy)
 		t = tree
 		return t
 	}
