@@ -24,7 +24,7 @@ func ValidNode(nid int, tree []models.Node) bool {
 }
 
 func CheckCyclicDependancy(pid, cid int, tree []models.Node) bool {
-	// have to check that the child node id(cid) and parent node id will not create any cyclic dependancy
+	// have to check that the child node id(cid) and parent node id will not create any cyclic dependency
 	// no one can be his own parent or ancestor
 	// have to check that the parent id passed does not have the child id passed as its parent or its ancestor
 	var parentnode, childnode models.Node

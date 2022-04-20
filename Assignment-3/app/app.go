@@ -17,7 +17,7 @@ const (
 	readnodeidparents   = "enter the node id to get its parents: "
 	readnodeidchild     = "enter the node id to get its childs: "
 	readnodeidancestor  = "enter the node id to get its ancestors: "
-	readnodeiddecendant = "enter the node id to get its decendants: "
+	readnodeiddecendant = "enter the node id to get its descendants: "
 	readparentnodeid    = "enter the parent node id: "
 	readchildnodeid     = "enter the child node id: "
 	nodeiderr           = "invalid node id"
@@ -67,7 +67,7 @@ loop:
 			}
 			controllers.GETAncestors(nodeid, tree)
 
-		case 4: // GET Decendants of a node
+		case 4: // GET Descendants of a node
 			op := services.ReadInput(readnodeiddecendant, in)
 			nodeid, err := utils.ValidateInput(op)
 			if err != nil {
@@ -77,7 +77,7 @@ loop:
 			}
 			controllers.GETDecendants(nodeid, tree)
 
-		case 5: // DELETE Dependancy passing parent nodeid and child nodeid
+		case 5: // DELETE Dependency passing parent nodeid and child nodeid
 			pop := services.ReadInput(readparentnodeid, in)
 			pnodeid, perr := utils.ValidateInput(pop)
 			if perr != nil {
@@ -94,7 +94,7 @@ loop:
 			}
 			tree = controllers.DELETEDependancy(pnodeid, cnodeid, tree)
 
-		case 6: // DELETE node from the tree and all its dependancy
+		case 6: // DELETE node from the tree and all its dependency
 			pop := services.ReadInput(readparentnodeid, in)
 			pnodeid, perr := utils.ValidateInput(pop)
 			if perr != nil {
@@ -104,7 +104,7 @@ loop:
 			}
 			controllers.DELETENode(pnodeid, &tree)
 
-		case 7: // POST new depandancy passing parent nodeid and child nodeid, check cyclic dependancy
+		case 7: // POST new dependency passing parent nodeid and child nodeid, check cyclic dependency
 			pop := services.ReadInput(readparentnodeid, in)
 			pnodeid, perr := utils.ValidateInput(pop)
 			if perr != nil {

@@ -11,7 +11,7 @@ import (
 const (
 	invalidparent    = "invalid parent node id"
 	invalidchild     = "invalid child node id"
-	cyclicdependancy = "this dependancy will result in cyclic dependancy, not allowed"
+	cyclicdependancy = "this dependency will result in cyclic dependency, not allowed"
 )
 
 func POSTDependancy(pid, cid int, tree []models.Node) []models.Node {
