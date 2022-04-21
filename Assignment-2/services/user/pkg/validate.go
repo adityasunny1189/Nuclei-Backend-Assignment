@@ -1,4 +1,4 @@
-package utils
+package services
 
 import (
 	"errors"
@@ -22,6 +22,8 @@ const (
 	DuplicateCourseErr = "course already subscribed"
 	RollnoNotFoundErr  = "rollno not present"
 )
+
+var PrescribedCourses = []string{"A", "B", "C", "D", "E", "F"}
 
 // validate name, should not be (blank/int)
 func ValidateFullName(n string) (name string, err error) {
@@ -80,27 +82,30 @@ func ValidateRollNumber(r string, rnlist map[int]bool) (roll int, err error) {
 }
 
 // validate courses, handle (blank, string, int, len(courses) == 4)
-func ValidateCourse(c string, cl map[byte]bool) (course byte, err error) {
+func ValidateCourse(c string, cl map[string]bool) (course string, err error) {
 	_, er := strconv.Atoi(c)
 	if er == nil {
 		err = errors.New(CourseIntErr)
+		return
 	} else if c == "" {
 		err = errors.New(EmptyCourseErr)
+		return
 	} else if len(c) != 1 {
 		err = errors.New(InvalidCourseErr)
+		return
 	} else {
-		byteArr := []byte(c)
-		if cl[byteArr[0]] {
+		if cl[c] {
 			err = errors.New(DuplicateCourseErr)
 			return
 		}
-		switch byteArr[0] {
-		case 'A', 'B', 'C', 'D', 'E', 'F':
-			course = byteArr[0]
-		default:
-			err = errors.New(InvalidCourseErr)
+		for _, val := range PrescribedCourses {
+			if c == val {
+				course = c
+				return
+			}
 		}
 	}
+	err = errors.New(InvalidCourseErr)
 	return
 }
 

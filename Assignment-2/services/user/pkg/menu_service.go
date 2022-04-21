@@ -1,6 +1,9 @@
-package src
+package services
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+)
 
 const (
 	menu = `-------- OPTIONS --------
@@ -14,4 +17,10 @@ const (
 
 func DisplayMenu() {
 	fmt.Printf("%s\n", menu)
+}
+
+func ReadInput(op string, in *bufio.Scanner) string {
+	fmt.Printf("enter your %s: ", op)
+	in.Scan()
+	return in.Text()
 }

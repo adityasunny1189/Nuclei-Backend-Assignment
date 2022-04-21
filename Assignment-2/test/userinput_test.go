@@ -1,7 +1,7 @@
 package test
 
 import (
-	"nuclei-assignment-2/utils"
+	pkg "nuclei-assignment-2/services/user/pkg"
 	"testing"
 )
 
@@ -109,9 +109,9 @@ var userstestdata = []struct {
 func TestUserInput(t *testing.T) {
 	for _, data := range userstestdata {
 		actualValue := true
-		_, nerr := utils.ValidateFullName(data.tname)
-		_, aerr := utils.ValidateAge(data.tage)
-		_, addrerr := utils.ValidateAddr(data.taddr)
+		_, nerr := pkg.ValidateFullName(data.tname)
+		_, aerr := pkg.ValidateAge(data.tage)
+		_, addrerr := pkg.ValidateAddr(data.taddr)
 		if nerr != nil || aerr != nil || addrerr != nil {
 			actualValue = false
 		}

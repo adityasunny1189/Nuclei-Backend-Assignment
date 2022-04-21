@@ -1,9 +1,9 @@
 package main
 
 import (
-	"nuclei-assignment-2/services"
+	"nuclei-assignment-2/app"
 )
 
 func main() {
-	services.StartScript()
+	app.StartApp()
 }

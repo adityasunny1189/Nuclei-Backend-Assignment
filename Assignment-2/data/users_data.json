@@ -1,30 +1,26 @@
 [
 	{
-		"full name": "aaditya",
-		"age": 22,
-		"address": "delhi",
-		"roll no": 32,
-		"courses": "QURFQw=="
-	},
-	{
-		"full name": "aditya pathak",
+		"full name": "Aditya Pathak",
 		"age": 21,
-		"address": "subhankarpur darbhanga bihar",
+		"address": "darbhanga",
 		"roll no": 3,
-		"courses": "QUVCRA=="
+		"courses": [
+			"A",
+			"E",
+			"D",
+			"C"
+		]
 	},
 	{
-		"full name": "aditya singh",
-		"age": 25,
-		"address": "patna",
-		"roll no": 4,
-		"courses": "RURDQg=="
-	},
-	{
-		"full name": "afsdg",
-		"age": 21,
-		"address": "sdsg",
-		"roll no": 21,
-		"courses": "QUVEQw=="
+		"full name": "Amit Shahwal",
+		"age": 22,
+		"address": "reva",
+		"roll no": 63,
+		"courses": [
+			"A",
+			"E",
+			"C",
+			"F"
+		]
 	}
 ]
