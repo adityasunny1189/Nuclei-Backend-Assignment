@@ -13,6 +13,12 @@ const (
 -----------------------------------------------------------------------------------------------------------------------
 `
 	endmenu = `-----------------------------------------------------------------------------------------------------------------------`
+	sortmsg = `enter the method you want to sort the data:
+1. By Name
+2. By Age
+3. By Roll no
+4. By Address
+c`
 )
 
 func (u *User) AddUserDetails(in *bufio.Scanner, rollnolist map[int]bool, users *[]User) {
@@ -110,8 +116,21 @@ func ParseCourse(c []string) (crs string) {
 	return
 }
 
-func (u *User) ShowUserDetails(users []User) {
-	SortData(users)
+func (u *User) ShowUserDetails(users []User, in *bufio.Scanner) {
+	fmt.Printf("%s", sortmsg)
+	so := pkg.ReadInput("choice", in)
+	switch so {
+	case "1":
+		SortDataByName(users)
+	case "2":
+		SortDatabyAge(users)
+	case "3":
+		SortDatabyRollno(users)
+	case "4":
+		SortDatabyAddress(users)
+	default:
+		fmt.Println("Invalid Choice")
+	}
 	fmt.Printf(startmenu, "name", "rollno", "age", "address", "courses")
 	for _, user := range users {
 		courses := ParseCourse(user.Courses)

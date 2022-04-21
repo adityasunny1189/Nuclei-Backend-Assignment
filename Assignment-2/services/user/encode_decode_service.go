@@ -51,18 +51,39 @@ func SerializeJSON(u []User) {
 	}
 }
 
-type userlist []User
+type byName []User
+type byAge []User
+type byRollno []User
+type byAddress []User
 
-func (a userlist) Len() int {
-	return len(a)
-}
-func (a userlist) Less(i, j int) bool {
-	return a[i].Fullname < a[j].Fullname
-}
-func (a userlist) Swap(i, j int) {
-	a[i], a[j] = a[j], a[i]
+func (a byName) Len() int           { return len(a) }
+func (a byName) Less(i, j int) bool { return a[i].Fullname < a[j].Fullname }
+func (a byName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+func (a byAge) Len() int           { return len(a) }
+func (a byAge) Less(i, j int) bool { return a[i].Age < a[j].Age }
+func (a byAge) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+func (a byRollno) Len() int           { return len(a) }
+func (a byRollno) Less(i, j int) bool { return a[i].Rollno < a[j].Rollno }
+func (a byRollno) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+func (a byAddress) Len() int           { return len(a) }
+func (a byAddress) Less(i, j int) bool { return a[i].Address < a[j].Address }
+func (a byAddress) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+func SortDataByName(users byName) {
+	sort.Sort(byName(users))
 }
 
-func SortData(users userlist) {
-	sort.Sort(userlist(users))
+func SortDatabyAge(users byAge) {
+	sort.Sort(byAge(users))
+}
+
+func SortDatabyRollno(users byRollno) {
+	sort.Sort(byRollno(users))
+}
+
+func SortDatabyAddress(users byAddress) {
+	sort.Sort(byAddress(users))
 }

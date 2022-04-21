@@ -31,7 +31,7 @@ start:
 		case 1: // Add user details
 			u.AddUserDetails(in, rollnolist, &users)
 		case 2: // Show user details
-			u.ShowUserDetails(users)
+			u.ShowUserDetails(users, in)
 		case 3: // Delete user details
 			u.DeleteUserDetails(in, &users, rollnolist)
 		case 4: // Save user details
