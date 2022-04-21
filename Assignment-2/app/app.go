@@ -27,15 +27,16 @@ start:
 			continue start
 		}
 		var u user.User
+		var db user.DBMethods = &u
 		switch ch {
 		case 1: // Add user details
 			u.AddUserDetails(in, rollnolist, &users)
 		case 2: // Show user details
-			u.ShowUserDetails(users, in)
+			user.ShowDetails(db, users, in) // interface
 		case 3: // Delete user details
 			u.DeleteUserDetails(in, &users, rollnolist)
 		case 4: // Save user details
-			u.SaveUserDetails(users)
+			user.SaveDetails(db, users) // interface
 		case 5: // Exit
 			break start
 		}
