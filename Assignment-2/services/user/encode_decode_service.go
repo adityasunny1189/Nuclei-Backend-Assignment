@@ -8,11 +8,15 @@ import (
 	"sort"
 )
 
+const (
+	path = "../Assignment-2/data/users_data.json"
+)
+
 func DeserializeJSON() (users []User) {
 	// read the data from the file
 	// store it in users
 	// return the users
-	abspath, ferr := filepath.Abs("../A2/data/users_data.json")
+	abspath, ferr := filepath.Abs(path)
 	if ferr != nil {
 		fmt.Println(ferr, "error finding file")
 		return
@@ -36,7 +40,7 @@ func SerializeJSON(u []User) {
 		fmt.Println(err)
 		return
 	}
-	absPath, patherr := filepath.Abs("../A2/data/users_data.json")
+	absPath, patherr := filepath.Abs(path)
 	if patherr != nil {
 		fmt.Println(patherr)
 		return

@@ -22,5 +22,17 @@
 			"C",
 			"F"
 		]
+	},
+	{
+		"full name": "Kunal Pandey",
+		"age": 25,
+		"address": "Patna",
+		"roll no": 21,
+		"courses": [
+			"A",
+			"E",
+			"F",
+			"D"
+		]
 	}
 ]
