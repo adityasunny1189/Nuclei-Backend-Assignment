@@ -1,0 +1,26 @@
+[
+	{
+		"full name": "Aditya Pathak",
+		"age": 21,
+		"address": "darbhanga",
+		"roll no": 3,
+		"courses": [
+			"A",
+			"E",
+			"D",
+			"C"
+		]
+	},
+	{
+		"full name": "Amit Shahwal",
+		"age": 22,
+		"address": "reva",
+		"roll no": 63,
+		"courses": [
+			"A",
+			"E",
+			"C",
+			"F"
+		]
+	}
+]
