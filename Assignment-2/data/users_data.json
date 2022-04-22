@@ -1,0 +1,50 @@
+[
+	{
+		"full name": "Aditya Pathak",
+		"age": 21,
+		"address": "darbhanga",
+		"roll no": 3,
+		"courses": [
+			"A",
+			"E",
+			"D",
+			"C"
+		]
+	},
+	{
+		"full name": "Kunal Pandey",
+		"age": 25,
+		"address": "Patna",
+		"roll no": 21,
+		"courses": [
+			"A",
+			"E",
+			"F",
+			"D"
+		]
+	},
+	{
+		"full name": "Saurav Bishwas",
+		"age": 18,
+		"address": "Kolkata",
+		"roll no": 48,
+		"courses": [
+			"E",
+			"D",
+			"A",
+			"C"
+		]
+	},
+	{
+		"full name": "Amit Shahwal",
+		"age": 22,
+		"address": "reva",
+		"roll no": 63,
+		"courses": [
+			"A",
+			"E",
+			"C",
+			"F"
+		]
+	}
+]
