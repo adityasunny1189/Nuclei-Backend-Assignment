@@ -6,7 +6,6 @@ import (
 	"nuclei-assignment-1/models"
 	"nuclei-assignment-1/services"
 	"os"
-	"time"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -39,10 +38,8 @@ func StartApp() {
 	}
 	fmt.Println("Connected to the database mystore")
 
-	go services.CreateBillCollection(ch, &bills)
-	services.FetchDataFromDB(ch, db, &orders)
-
-	time.Sleep(time.Second * 2)
+	go services.FetchDataFromDB(ch, db, &orders)
+	services.CreateBillCollection(ch, &bills)
 
 	for _, bill := range bills {
 		bill.DisplayBill()

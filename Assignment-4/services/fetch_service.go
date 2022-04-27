@@ -10,7 +10,7 @@ const (
 	queryStatement = "SELECT * FROM cart"
 )
 
-func FetchDataFromDB(ch chan models.Order, db *sql.DB, orderlist *[]models.Order) {
+func FetchDataFromDB(ch chan<- models.Order, db *sql.DB, orderlist *[]models.Order) {
 	rows, qerr := db.Query(queryStatement)
 	if qerr != nil {
 		fmt.Println(qerr)
@@ -27,4 +27,5 @@ func FetchDataFromDB(ch chan models.Order, db *sql.DB, orderlist *[]models.Order
 		*orderlist = append(*orderlist, odr)
 		ch <- odr
 	}
+	close(ch)
 }
